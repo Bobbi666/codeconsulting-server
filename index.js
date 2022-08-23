@@ -5,10 +5,10 @@ const app = express();
 require('dotenv').config();
 const PORT = process.env.PORT || 4000;
 
+app.use(express.json());
 const sendEmail = require('./utils/emailCenter');
 
 app.use(cors());
-app.use(express.json());
 
 app.listen(PORT, () => console.log('server is up and runnig at PORT :' + PORT));
 
@@ -18,6 +18,8 @@ app.get('/test', (req, res) => {
 
 app.post('/sendemail', async (req, res) => {
 	const { name, message, email, phone } = req.body;
+
+	console.log(req.body);
 
 	let htmlMessage = `  <!DOCTYPE html>
     <html lang="en">
@@ -69,7 +71,7 @@ app.post('/sendemail', async (req, res) => {
     </html> `;
 
 	const options = {
-		email: 'alib4111@gmail.com',
+		email: 'Oskar.johansson@codeconsulting.se',
 		subject: 'test',
 		message: htmlMessage,
 	};
